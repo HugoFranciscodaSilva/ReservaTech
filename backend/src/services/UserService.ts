@@ -1,36 +1,68 @@
-import type { Role } from "../generated/prisma/enums.js"
 import prisma from "../lib/prisma.js"
+import bcrypt from 'bcrypt'
+
+interface UserDTO{
+    id:number,
+    name:string,
+    email:string,
+    password:string,
+    role?:"Aluno" | "Administrador" | undefined
+}
 
 
 export const getUsersService = async () =>{
-    return await prisma.user.findMany()
+    return await prisma.user.findMany({select:{
+        id:true,
+        name:true,
+        email:true,
+        role:true
+    }})
 }
 
 export const getUserService = async (id:Number) =>{
-    return await prisma.user.findUnique({where:{id:Number(id)}})
+    return await prisma.user.findUnique({
+        where:{id:Number(id)},
+        select:{
+        id:true,
+        name:true,
+        email:true,
+        role:true
+    }})
 }
 
 
-export const postUserService = async (name:string,email:string,password:string,role:Role) =>{
+export const postUserService = async (data:UserDTO) =>{
+
+    const passwordHashed = await bcrypt.hash(data.password,10)
+
     return await prisma.user.create({
         data:{
-            name,
-            email,
-            password,
-            role
+            name:data.name,
+            email:data.email,
+            password:passwordHashed,
+            role:data.role
         }
     })
 }
 
-export const patchUserService = async (id:number,name:string,email:string,password:string) =>{
+export const patchUserService = async (data:UserDTO) =>{
+
+    const user = await prisma.user.findUnique({where:{id:data.id}})
+
+    if(!user){
+        
+    }
+
+    const passwordHashed = await bcrypt.hash(data.password,10)
+
     return await prisma.user.update({
         where:{
-            id:id
+            id:data.id
         },
         data:{
-            name,
-            email,
-            password
+            name:data.name,
+            email:data.email,
+            password:passwordHashed
         }
     })
 }

@@ -42,5 +42,5 @@ model Reserve{
 
 enum Role{
   Aluno
-  Adminstrador
+  Administrador
 }
