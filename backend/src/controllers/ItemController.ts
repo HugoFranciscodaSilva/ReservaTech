@@ -65,7 +65,7 @@ export const deleteItemController = async (req:Request,res:Response)=>{
 
     try {
         await deleteItemService(Number(id))
-        res.end(204)
+        res.status(204).send()
     } catch (error) {
         console.log(error)
         res.status(500).json({mensagem:"Erro ao deletar item!"})

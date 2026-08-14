@@ -17,3 +17,13 @@ export class ItemNotFoundError extends Error{
         this.StatusCodes = 404
     }
 }
+
+export class ReserveNotFoundError extends Error{
+    public readonly StatusCode:number
+
+    constructor(message = "Reserva não existe!"){
+        super(message)
+        this.name = 'ReserveNotFoundError'
+        this.StatusCode = 404
+    }
+}

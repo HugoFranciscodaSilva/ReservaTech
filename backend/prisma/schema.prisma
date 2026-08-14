@@ -19,6 +19,7 @@ model User{
   password String
   role Role @default(Aluno)
   reserves Reserve[]
+  dataCriacao DateTime @map("criado_em") @default(now())
 
   @@map("users")
 }
@@ -26,6 +27,8 @@ model User{
 model Item{
   id Int @id @default(autoincrement())
   name String
+  reserves Reserve[]
+  dataCriacao DateTime @map("criado_em") @default(now())
 
   @@map("items")
 }
@@ -35,7 +38,10 @@ model Reserve{
   user User @relation(fields: [userId],references: [id])
   userId Int
   dateReserve DateTime @default(now())
-  dateReturn DateTime
+  dateReturn DateTime?
+  item Item @relation(fields: [itemId],references: [id])
+  itemId Int
+  dataCricao DateTime @map("criado_em") @default(now())
 
   @@map("reserves")
 }

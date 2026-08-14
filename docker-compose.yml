@@ -13,16 +13,16 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
-  backend:
-    build: ./backend
-    container_name: backend_reservatech
-    restart: always
-    env_file:
-      - ./backend/.env
-    ports:
-      - "3001:3001"
-    depends_on:
-      - db_reservatech
+  # backend:
+  #   build: ./backend
+  #   container_name: backend_reservatech
+  #   restart: always
+  #   env_file:
+  #     - ./backend/.env
+  #   ports:
+  #     - "3001:3001"
+  #   depends_on:
+  #     - db_reservatech
 
 volumes:
   pgdata:
