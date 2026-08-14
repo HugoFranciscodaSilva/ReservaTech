@@ -1,8 +1,9 @@
-import type { createUserDTO, updateUserDTO,  } from "../dtos/UserDTO.js"
+import type { createUserDTO  } from "../dtos/UserDTO.js"
 import { UserNotFoundError } from "../errors/AppErrors.js"
 import type { Prisma } from "../generated/prisma/client.js"
 import prisma from "../lib/prisma.js"
 import bcrypt from 'bcrypt'
+import type { UpdateUserDTO } from "../schemas/UserSchema.js"
 
 
 export const getUsersService = async () =>{
@@ -40,7 +41,7 @@ export const postUserService = async (data:createUserDTO) =>{
     })
 }
 
-export const patchUserService = async (data:updateUserDTO,id:number) =>{
+export const patchUserService = async (data:UpdateUserDTO,id:number) =>{
 
     const user = await prisma.user.findUnique({where:{id}})
 

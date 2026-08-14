@@ -8,6 +8,5 @@ export interface UserDTO{
 
 export type createUserDTO = Omit<UserDTO, 'id'>
 
-export type updateUserDTO = Partial<createUserDTO>
 
 
