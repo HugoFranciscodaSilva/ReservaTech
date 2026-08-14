@@ -65,7 +65,7 @@ export const patchUserService = async (data:UpdateUserDTO,id:number) =>{
 
     return await prisma.user.update({
         where:{id},
-        data:{updateData}
+        data:{...updateData}
     })
 }
 
