@@ -1,13 +1,8 @@
+import type { createUserDTO, updateUserDTO,  } from "../dtos/UserDTO.js"
+import { UserNotFoundError } from "../errors/AppErrors.js"
+import type { Prisma } from "../generated/prisma/client.js"
 import prisma from "../lib/prisma.js"
 import bcrypt from 'bcrypt'
-
-interface UserDTO{
-    id:number,
-    name:string,
-    email:string,
-    password:string,
-    role?:"Aluno" | "Administrador" | undefined
-}
 
 
 export const getUsersService = async () =>{
@@ -31,7 +26,7 @@ export const getUserService = async (id:Number) =>{
 }
 
 
-export const postUserService = async (data:UserDTO) =>{
+export const postUserService = async (data:createUserDTO) =>{
 
     const passwordHashed = await bcrypt.hash(data.password,10)
 
@@ -40,30 +35,36 @@ export const postUserService = async (data:UserDTO) =>{
             name:data.name,
             email:data.email,
             password:passwordHashed,
-            role:data.role
+            role:data.role ?? "Aluno"
         }
     })
 }
 
-export const patchUserService = async (data:UserDTO) =>{
+export const patchUserService = async (data:updateUserDTO,id:number) =>{
 
-    const user = await prisma.user.findUnique({where:{id:data.id}})
+    const user = await prisma.user.findUnique({where:{id}})
 
     if(!user){
-        
+      throw new UserNotFoundError()  
     }
 
-    const passwordHashed = await bcrypt.hash(data.password,10)
+    const updateData:Prisma.UserUpdateInput = {}
+
+    if(data.email){
+        updateData.email = data.email
+    }
+
+    if(data.name){
+        updateData.name = data.name
+    }
+
+    if(data.password){
+        updateData.password =  await bcrypt.hash(data.password,10)
+    }
 
     return await prisma.user.update({
-        where:{
-            id:data.id
-        },
-        data:{
-            name:data.name,
-            email:data.email,
-            password:passwordHashed
-        }
+        where:{id},
+        data:{updateData}
     })
 }
 

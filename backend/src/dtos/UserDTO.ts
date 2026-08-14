@@ -1,0 +1,13 @@
+export interface UserDTO{
+    id:number,
+    name:string,
+    email:string,
+    password:string,
+    role:"Aluno" | "Administrador"
+}
+
+export type createUserDTO = Omit<UserDTO, 'id'>
+
+export type updateUserDTO = Partial<createUserDTO>
+
+
