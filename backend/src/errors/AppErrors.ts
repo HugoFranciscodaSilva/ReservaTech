@@ -27,3 +27,13 @@ export class ReserveNotFoundError extends Error{
         this.StatusCode = 404
     }
 }
+
+export class AuthEmailOrPasswordError extends Error{
+    public readonly StatusCode:number
+
+    constructor(message = "Email ou senha incorretos!"){
+        super(message)
+        this.name = 'AuthEmailOrPasswordError'
+        this.StatusCode = 401
+    }
+}
