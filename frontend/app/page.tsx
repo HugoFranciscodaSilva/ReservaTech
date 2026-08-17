@@ -1,10 +1,17 @@
 'use client'
 
+import Image from "next/image"
+
 export default function Home(){
   return(
-    <main className="bg-white h-dvh text-black">
-      <section className="h-full flex justify-center items-center">
-        <div className="w-[35%] shadow-2xl rounded-xl flex flex-col items-center">
+    <main className="bg-white h-dvh text-black flex">
+      <section className="h-full w-1/2 bg-blue-600">
+        <picture>
+          {/* <Image className="w-full h-full" width={'100'} height={'100'} src={'/images/bannerLogin.png'} alt="Imagem ilustrativa" /> */}
+        </picture>
+      </section>
+      <section className="h-full w-1/2 flex justify-center items-center">
+        <div className="w-[60%] shadow-2xl rounded-xl flex flex-col items-center">
           <section className="flex w-full">
             <div className="w-1/2 bg-gray-200 text-blue-800 border-b-2 border-blue-800 text-center p-4">
               <p>Login</p>
@@ -18,20 +25,20 @@ export default function Home(){
           <form className="w-full flex flex-col items-center">
             <div className="relative w-[80%]">
               <img className="absolute top-1/2 -translate-y-1/2 z-10 ms-3" src="/icons/mail.svg" alt="Icone de email" />
-              <input className="p-4 w-full bg-gray-100 my-3 ps-12 border-2 border-gray-400 rounded-xl active:outline-gray-600 focus:outline-gray-600" type="email" placeholder="E-mail Intitucional" />
+              <input className="p-4 w-full bg-gray-100 my-4 ps-12 border-2 border-gray-400 rounded-xl active:outline-gray-600 focus:outline-gray-600" type="email" placeholder="E-mail Intitucional" />
             </div>
             <div className="relative w-[80%]">
               <img className="absolute top-1/2 -translate-y-1/2 z-10 ms-3" src="/icons/lock.svg" alt="Icone de cadeado" />
-              <input className="p-4 w-full bg-gray-100 my-3 ps-12 border-2 border-gray-400 rounded-xl active:outline-gray-600 focus:outline-gray-600" type="password" placeholder="Senha" />
+              <input className="p-4 w-full bg-gray-100 my-4 ps-12 border-2 border-gray-400 rounded-xl active:outline-gray-600 focus:outline-gray-600" type="password" placeholder="Senha" />
             </div>
-            <section className="flex justify-between w-[80%] my-3">
-              <div className="space-x-2">
+            <section className="flex justify-between items-center w-[80%] my-3">
+              <div className="space-x-2 my-3 flex justify-center items-center">
                 <input type="checkbox" id="lembrar-me"/>
                 <label htmlFor="lembrar-me">Lembrar-me</label>
               </div>
               <p className="text-blue-900 font-bold">Esqueceu a senha?</p>
             </section>
-            <button className="bg-blue-700 text-white w-[80%] rounded-xl p-4 cursor-pointer flex justify-center gap-3 mb-5">Entrar <img src="/icons/arrowRight.svg" alt="Icone de seta para a direita" /></button>
+            <button className="bg-blue-700 text-white w-[80%] rounded-xl p-4 cursor-pointer flex justify-center gap-3 mb-15">Entrar <img src="/icons/arrowRight.svg" alt="Icone de seta para a direita" /></button>
           </form>
         </div>
       </section>
