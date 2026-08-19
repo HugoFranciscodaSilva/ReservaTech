@@ -1,3 +1,4 @@
+import ButtonLogout from "@/components/ButtonLogout";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Link from "next/link";
@@ -46,6 +47,7 @@ export default function Dashboard(){
                 </TableBody>
             </Table>
             <Link className={buttonVariants({variant:"default"})} href={'/relatorio'}>Ver relatório</Link>
+            <ButtonLogout/>
         </main>
     )
 }
