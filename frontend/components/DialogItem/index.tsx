@@ -10,8 +10,10 @@ import { API } from "@/service/axios";
 import { itemProps, itemSchema } from "@/schemas/itemSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
+import { useAuthStore } from "@/store/store";
 
-export default function DialogItem(){
+export  function DialogItem(){
 
     async function CreateItem(data:itemSchema){
         return await API.post('/items',data)
@@ -50,4 +52,19 @@ export default function DialogItem(){
         </Dialog>
     )
 
+}
+
+export function AddItem(){
+    const [hasCompleted, setHasCompleted] = useState<boolean>(false)
+    const user = useAuthStore((state)=> state.userInfo.user)
+
+    useEffect(()=>{
+        setHasCompleted(true)
+    },[])
+
+    if(!hasCompleted || !user?.role){
+        return null
+    }
+
+    return <DialogItem/>
 }

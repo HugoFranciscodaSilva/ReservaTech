@@ -1,3 +1,5 @@
+'use client'
+
 import { LogOut } from "lucide-react";
 import { Button } from "../ui/button";
 import Cookies from "js-cookie";
