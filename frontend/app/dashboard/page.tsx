@@ -6,8 +6,8 @@ import Link from "next/link";
 import {jwtDecode} from 'jwt-decode'
 import cookies from "js-cookie";
 import DialogItem from "@/components/DialogItem";
-import TableItem from "@/components/TableItem";
 import { cn } from "@/lib/utils";
+import TableItem from "@/components/TableItem";
 
 interface payload{
     id:number,
