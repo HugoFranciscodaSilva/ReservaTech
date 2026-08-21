@@ -10,12 +10,14 @@ import { API } from '@/service/axios';
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation';
 import cookie from 'js-cookie'
+import { useAuthStore } from '@/store/store';
 
 
 
 export default function FormLogin(){
 
     const router = useRouter()
+    const updateSession = useAuthStore((state)=> state.updateSession)
     const {register,handleSubmit,formState: {errors},reset} = useForm<loginSchema>({resolver:zodResolver(loginProps)})
     const queryClient = useQueryClient()
     async function Logar(data:loginSchema){
@@ -26,9 +28,11 @@ export default function FormLogin(){
         mutationFn:Logar,
         onSuccess:(data)=>{
             reset()
-            queryClient.invalidateQueries({queryKey:['usuarios']})
+            queryClient.invalidateQueries({queryKey:['users']})
             alert(data.data.mensagem)
-            cookie.set('token',data.data.token)
+            const umaHora = new Date(new Date().getTime() + 60 * 60 * 1000)
+            cookie.set('token',data.data.token,{expires:umaHora})
+            updateSession
             router.push('/dashboard')
         },
         onError:(error)=>{
