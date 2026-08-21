@@ -1,52 +1,28 @@
+'use client'
+
 import ButtonLogout from "@/components/ButtonLogout";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
+import {jwtDecode} from 'jwt-decode'
+import cookies from "js-cookie";
+import DialogItem from "@/components/DialogItem";
+import TableItem from "@/components/TableItem";
+import { cn } from "@/lib/utils";
+
+interface payload{
+    id:number,
+    role:string
+}
 
 export default function Dashboard(){
+    const token = cookies.get('token') || "opa"
+    const user = jwtDecode<payload>(token)
     return(
-        <main className="h-dvh w-full flex flex-col justify-center">           
-            <Table className="w-[80%] m-auto">
-                <TableHeader>
-                    <TableRow>
-                        <TableHead className="rounded-tl-md">Nome do Dispositivo</TableHead>
-                        <TableHead className="rounded-tr-md">Ações</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    <TableRow>
-                        <TableCell>Celular S20</TableCell>
-                        <TableCell>
-                            <Button>Reservar</Button>
-                        </TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>Celular S20</TableCell>
-                        <TableCell>
-                            <Button>Reservar</Button>
-                        </TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>Celular S20</TableCell>
-                        <TableCell>
-                            <Button>Reservar</Button>
-                        </TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>Celular S20</TableCell>
-                        <TableCell>
-                            <Button>Reservar</Button>
-                        </TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>Celular S20</TableCell>
-                        <TableCell>
-                            <Button>Reservar</Button>
-                        </TableCell>
-                    </TableRow>
-                </TableBody>
-            </Table>
-            <Link className={buttonVariants({variant:"default"})} href={'/relatorio'}>Ver relatório</Link>
+        <main className="h-dvh w-full flex flex-col justify-center relative">
+            {user.role && <DialogItem/>}
+
+            <Link className={cn(buttonVariants({variant:"default"}),'w-min ms-25')} href={'/relatorio'}>Ver relatório</Link>
+            <TableItem/>
             <ButtonLogout/>
         </main>
     )
