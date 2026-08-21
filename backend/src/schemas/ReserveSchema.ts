@@ -6,7 +6,9 @@ export const ReserveSchema = z.object({
 })
 
 export const patchReserveProps = z.object({
-    dateReturn:z.coerce.date()
+    dateReturn:z.coerce.date(),
+    itemReserve:z.number()
+
 })
 
 export type patchReserveSchema = z.infer<typeof patchReserveProps>

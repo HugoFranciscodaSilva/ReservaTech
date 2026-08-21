@@ -8,12 +8,23 @@ export const getReserveService = async ()=>{
     return await prisma.reserve.findMany()
 }
 export const postReserveService = async (data:createReserveDTO)=>{
-    return await prisma.reserve.create({
+    try {
+        await prisma.item.update({
+            where:{id:data.itemReserve},
+            data:{
+                reserved:"Reservado"
+            }
+        })
+         return await prisma.reserve.create({
         data:{
             userId:data.studentReserve,
             itemId:data.itemReserve
         }
     })
+    } catch (error) {
+        throw error
+    }
+   
 }
 export const patchReserveService = async (data:patchReserveSchema,id:number)=>{
 
@@ -22,11 +33,21 @@ export const patchReserveService = async (data:patchReserveSchema,id:number)=>{
     if(!reserve){
         throw new ReserveNotFoundError()
     }
-
-    return await prisma.reserve.update({
+    try {
+        await prisma.item.update({
+            where:{id:data.itemReserve},
+            data:{
+                reserved:"Disponivel"
+            }
+        })
+        return await prisma.reserve.update({
         where:{id},
         data:{
             dateReturn:data.dateReturn
         }
     })
+    } catch (error) {
+        throw error
+    }
+    
 }

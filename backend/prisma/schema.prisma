@@ -29,6 +29,7 @@ model Item{
   name String
   reserves Reserve[]
   dataCriacao DateTime @map("criado_em") @default(now())
+  reserved Status @default(Disponivel)
 
   @@map("items")
 }
@@ -49,4 +50,9 @@ model Reserve{
 enum Role{
   Aluno
   Administrador
+}
+
+enum Status{
+  Reservado
+  Disponivel
 }
