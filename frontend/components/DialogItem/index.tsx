@@ -59,14 +59,10 @@ export function AddItem(){
     const user = useAuthStore((state)=> state.userInfo.user)
 
     useEffect(()=>{
-        if(user?.role === "Administrador"){
-            setHasCompleted(true)
-        }else{
-            setHasCompleted(false)
-        }
+        setHasCompleted(true)
     },[])
 
-    if(!hasCompleted || !user?.role){
+    if(!hasCompleted || user?.role !== "Administrador"){
         return null
     }
 
