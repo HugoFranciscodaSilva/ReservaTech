@@ -6,3 +6,12 @@ export const reserveProps = z.object({
 })
 
 export type reserveSchema = z.infer<typeof reserveProps>
+
+
+export interface reserveExtends extends reserveSchema{
+    id:number,
+    item:{name:string},
+    user:{name:string},
+    dateReserve:string,
+    dateReturn:string
+}

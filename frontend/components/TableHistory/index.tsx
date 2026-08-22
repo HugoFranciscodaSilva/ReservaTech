@@ -3,18 +3,10 @@
 import { API } from "@/service/axios"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
-import { reserveSchema } from "@/schemas/reserveSchema"
+import { reserveExtends, reserveSchema } from "@/schemas/reserveSchema"
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { Button } from "../ui/button"
-
-interface reserveExtends extends reserveSchema{
-    id:number,
-    item:{name:string},
-    dateReserve:string,
-    dateReturn:string
-}
-
 
 export default function TableHistory(){
 
@@ -65,7 +57,7 @@ export default function TableHistory(){
                             <TableCell colSpan={4} className="text-center">Erro ao carregar reservas!</TableCell>
                         </TableRow>
                     }
-                    {data?.lenght === 0 && 
+                    {data?.length === 0 && 
                         <TableRow>
                             <TableCell colSpan={4} className="text-center">Nenhuma reserva feita ainda</TableCell>
                         </TableRow>
