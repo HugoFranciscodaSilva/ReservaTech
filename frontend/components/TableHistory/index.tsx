@@ -2,18 +2,38 @@
 
 import { API } from "@/service/axios"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { reserveSchema } from "@/schemas/reserveSchema"
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
+import { Button } from "../ui/button"
 
 interface reserveExtends extends reserveSchema{
     id:number,
-    nameItem:string,
+    item:{name:string},
     dateReserve:string,
     dateReturn:string
 }
 
 
 export default function TableHistory(){
+
+    const queryClient = useQueryClient()
+
+    async function patchReserve(itemId:number){
+        try {
+            await API.patch(`/reserves/${itemId}`,{
+                itemReserve:itemId,
+                dateReturn:new Date().toISOString()
+            })
+            queryClient.invalidateQueries({queryKey:['items']})
+            queryClient.invalidateQueries({queryKey:['reserves']})
+            alert("Item devolvido com sucesso!")
+        } catch (error) {
+            console.log(error)
+        }
+       
+    }
     async function fetchReserves(){
         const res = await API.get('/reserves')
         return res.data
@@ -35,11 +55,6 @@ export default function TableHistory(){
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    <TableRow>
-                        <TableCell>Celular S20</TableCell>
-                        <TableCell>25/06/2026</TableCell>
-                        <TableCell>08/08/2026</TableCell>
-                    </TableRow>
                     {isLoading &&
                         <TableRow>
                             <TableCell colSpan={4} className="text-center">Carregando...</TableCell>
@@ -57,9 +72,15 @@ export default function TableHistory(){
                     }
                     {data?.map((reserve:reserveExtends) =>(
                         <TableRow key={reserve.id}>
-                            <TableCell>{reserve.nameItem}</TableCell>
-                            <TableCell>{reserve.dateReserve}</TableCell>
-                            <TableCell>{reserve.dateReturn}</TableCell>
+                            <TableCell>{reserve.item.name}</TableCell>
+                            <TableCell>{format(reserve.dateReserve,'dd/MM/yyyy',{locale:ptBR})}</TableCell>
+                            <TableCell>{reserve.dateReturn ? format(reserve.dateReturn,'dd/MM/yyyy',{locale:ptBR}) : 'Não foi devolvido'}</TableCell>
+                            <TableCell>
+                                {!reserve.dateReturn && 
+                                    <Button onClick={()=> patchReserve(reserve.id)}>Devolver</Button>
+                                }
+                                {reserve.dateReturn && 'Devolvido'}
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
