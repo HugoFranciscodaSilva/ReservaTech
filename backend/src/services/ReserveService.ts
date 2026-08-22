@@ -5,7 +5,20 @@ import type { patchReserveSchema } from "../schemas/ReserveSchema.js"
 
 
 export const getReserveService = async ()=>{
-    return await prisma.reserve.findMany()
+    return await prisma.reserve.findMany({
+        include:{
+            user:{
+                select:{
+                    name:true
+                }
+            },
+            item:{
+                select:{
+                    name:true
+                }
+            }
+        }
+    })
 }
 export const postReserveService = async (data:createReserveDTO)=>{
     try {
