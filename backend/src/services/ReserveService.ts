@@ -20,6 +20,19 @@ export const getReserveService = async ()=>{
         }
     })
 }
+
+export const getReserveFromUserService = async (id:number)=>{
+    return await prisma.reserve.findMany({
+        where:{userId:id},
+        include:{
+            item:{
+                select:{
+                    name:true
+                }
+            }
+        }
+    })
+}
 export const postReserveService = async (data:createReserveDTO)=>{
     try {
         await prisma.item.update({

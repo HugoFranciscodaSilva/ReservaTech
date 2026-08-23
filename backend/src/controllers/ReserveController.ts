@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { getReserveService, patchReserveService, postReserveService } from "../services/ReserveService.js";
+import { getReserveFromUserService, getReserveService, patchReserveService, postReserveService } from "../services/ReserveService.js";
 import {  patchReserveProps, ReserveSchema } from "../schemas/ReserveSchema.js";
 import { ReserveNotFoundError } from "../errors/AppErrors.js";
 
@@ -7,6 +7,18 @@ export const getReserveController = async (req:Request,res:Response) =>{
     try {
         const reservas = await getReserveService()
         res.status(200).json(reservas)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({mensagem:"Erro ao listar reservas!"})
+    }
+}
+
+export const getReserveFromUserController = async (req:Request,res:Response) =>{
+    const { id } = req.params
+
+    try {
+        const reserves = await getReserveFromUserService(Number(id))
+        res.status(200).json(reserves) 
     } catch (error) {
         console.log(error)
         res.status(500).json({mensagem:"Erro ao listar reservas!"})
