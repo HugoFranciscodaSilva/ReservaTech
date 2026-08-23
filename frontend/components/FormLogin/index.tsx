@@ -8,13 +8,24 @@ import { loginProps, loginSchema } from '@/schemas/loginSchema';
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { API } from '@/service/axios';
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import cookie from 'js-cookie'
 import { useAuthStore } from '@/store/store';
+import { useEffect } from 'react';
 
 
 
 export default function FormLogin(){
+
+    const searchParams = useSearchParams()
+    const errorTypes = searchParams.get('error')
+
+    useEffect(()=>{
+        if(errorTypes === 'unauthorized'){
+            alert("Você precisa logar!")
+            window.history.replaceState({},'','/')
+        }
+    },[errorTypes])
 
     const router = useRouter()
     const updateSession = useAuthStore((state)=> state.updateSession)

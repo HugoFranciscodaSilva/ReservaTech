@@ -5,6 +5,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from ".
 import { API } from "@/service/axios";
 import { reserveExtends } from "@/schemas/reserveSchema";
 import { Button } from "../ui/button";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 export default function TableReport(){
 
@@ -63,11 +65,11 @@ export default function TableReport(){
                     </TableRow>
                 }
                 {data?.map((reserves:reserveExtends) =>(
-                    <TableRow>
+                    <TableRow key={reserves.id}>
                         <TableCell>{reserves.user.name}</TableCell>
                         <TableCell>{reserves.item.name}</TableCell>
-                        <TableCell>{reserves.dateReserve}</TableCell>
-                        <TableCell>{reserves.dateReturn}</TableCell>
+                        <TableCell>{format(reserves.dateReserve,'dd/MM/yyyy',{locale:ptBR})}</TableCell>
+                        <TableCell>{reserves.dateReturn ? format(reserves.dateReserve,'dd//MM/yyyy',{locale:ptBR}) : 'Não devolvido'}</TableCell>
                         <TableCell>
                             {!reserves.dateReturn && 
                                 <Button onClick={()=> patchReserve(reserves.id)}>Devolver</Button>
