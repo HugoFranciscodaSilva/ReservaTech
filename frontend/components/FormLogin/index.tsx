@@ -43,7 +43,7 @@ export default function FormLogin(){
             alert(data.data.mensagem)
             const umaHora = new Date(new Date().getTime() + 60 * 60 * 1000)
             cookie.set('token',data.data.token,{expires:umaHora})
-            updateSession
+            updateSession()
             router.push('/dashboard')
         },
         onError:(error)=>{

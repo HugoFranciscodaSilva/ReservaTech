@@ -13,6 +13,7 @@ interface authStore{
         user:userPayload | null
     }
     updateSession: ()=> void
+    clearSession: ()=> void
 }
 
 function userTokenDecode(){
@@ -38,5 +39,6 @@ function userTokenDecode(){
 
 export const useAuthStore = create<authStore>((set)=>({
     userInfo: userTokenDecode(),
-    updateSession: ()=>set({userInfo:userTokenDecode()})
+    updateSession: ()=>set({userInfo:userTokenDecode()}),
+    clearSession: ()=>set({userInfo: {token:null,user:null}})
 }))
