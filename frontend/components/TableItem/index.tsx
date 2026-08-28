@@ -39,10 +39,11 @@ export default function TableItem(){
     })
 
     return(
-        <Table className="w-[80%] m-auto my-3">
+        <Table className="w-full m-auto my-3">
                 <TableHeader>
                     <TableRow>
                         <TableHead className="rounded-tl-md">Nome do Dispositivo</TableHead>
+                        <TableHead>Status</TableHead>
                         <TableHead className="rounded-tr-md">Ações</TableHead>
                     </TableRow>
                 </TableHeader>

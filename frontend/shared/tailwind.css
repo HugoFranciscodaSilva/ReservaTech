@@ -50,6 +50,15 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --color-fundoPrincipal:#0D0F0E;
+  --color-fundoSecundairo:#151918;
+  --color-card:#1C211F;
+  --color-superficie:#242A27;
+  --color-borda:#303833;
+  --color-textoPrincipal:#F2F0E8;
+  --color-textoSecundario:#A9ADA7;
+  --color-textoDesabilitado:#666D67;
+
 }
 
 /*---break---
