@@ -22,6 +22,6 @@ export default function ButtonLogout(){
     }
 
     return(
-        <Button className={'absolute bottom-2 right-10'} onClick={Logout}><LogOut/>Fazer logout</Button>
+        <Button className={'px-6 py-6 border-2 border-borda bg-fundoPrincipal'} onClick={Logout}><LogOut/>Sair</Button>
     )
 }

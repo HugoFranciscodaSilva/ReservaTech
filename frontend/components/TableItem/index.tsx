@@ -66,8 +66,8 @@ export default function TableItem(){
                     }
                     {data?.map((item:itemProps)=>
                     <TableRow key={item.id}>
-                        <TableCell className="bg-fundoPrincipal text-textoPrincipal px-10 py-5 border-y-2 border-l-2 border-borda">{item.name}</TableCell>
-                        <TableCell className="bg-fundoPrincipal text-textoPrincipal px-10 py-5 border-y-2 border-borda">
+                        <TableCell className="bg-fundoSecundairo text-textoPrincipal px-10 py-5 border-y-2 border-l-2 border-borda">{item.name}</TableCell>
+                        <TableCell className="bg-fundoSecundairo text-textoPrincipal px-10 py-5 border-y-2 border-borda">
                             {item.reserved === "Disponivel" &&
                              <div className="flex items-center gap-2">
                                 <div className="w-3 h-3 bg-secundaria rounded-full"></div>
@@ -80,7 +80,7 @@ export default function TableItem(){
                             </div>
                              }
                         </TableCell>
-                        <TableCell  className="bg-fundoPrincipal text-textoPrincipal px-10 py-5 border-y-2 border-r-2 border-borda">
+                        <TableCell  className="bg-fundoSecundairo text-textoPrincipal px-10 py-5 border-y-2 border-r-2 border-borda">
                             {item.reserved == "Reservado" && <Button className={'w-[80%] bg-fundoPrincipal border-2 border-borda px-8 py-6 flex items-center justify-between'} disabled> <LockKeyhole className="text-textoDesabilitado"/> Reservado</Button>}
                             {item.reserved == "Disponivel" && <Button className={'w-[80%] bg-primaria px-8 py-6 flex items-center justify-between hover:bg-hoverPrimaria'} onClick={() => createReserve(user?.id,item.id)}>Reservar <ArrowRight/> </Button>}
                         </TableCell>
