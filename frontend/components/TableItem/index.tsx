@@ -6,10 +6,11 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from ".
 import { API } from "@/service/axios";
 import { itemSchema } from "@/schemas/itemSchema";
 import { useAuthStore } from "@/store/store";
+import { ArrowRight, LockKeyhole } from "lucide-react";
 
 interface itemProps extends itemSchema{
     id:number,
-    name:string
+    name:string,
 }
 
 export default function TableItem(){
@@ -42,33 +43,46 @@ export default function TableItem(){
         <Table className="w-full m-auto my-3">
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="rounded-tl-md">Nome do Dispositivo</TableHead>
-                        <TableHead>Status</TableHead>
-                        <TableHead className="rounded-tr-md">Ações</TableHead>
+                        <TableHead className="rounded-tl-md px-10 py-5 bg-card text-textoSecundario border-y-2 border-borda">EQUIPAMENTO</TableHead>
+                        <TableHead className="px-10 py-5 bg-card text-textoSecundario border-y-2 border-borda">STATUS</TableHead>
+                        <TableHead className="rounded-tr-md px-10 py-5 bg-card text-textoSecundario border-y-2 border-borda w-[20%]">AÇÕES</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {isError &&
                         <TableRow>
-                            <TableCell colSpan={2} className="text-center">Erro ao carregar itens.</TableCell>
+                            <TableCell colSpan={3} className="text-center">Erro ao carregar itens.</TableCell>
                         </TableRow>
                     }
                     {isLoading &&
                         <TableRow>
-                            <TableCell colSpan={2} className="text-center">Carregando itens...</TableCell>
+                            <TableCell colSpan={3} className="text-center">Carregando itens...</TableCell>
                         </TableRow>
                     }
                     {data?.length === 0 &&
                         <TableRow>
-                            <TableCell colSpan={2} className="text-center">Não há itens.</TableCell>
+                            <TableCell colSpan={3} className="text-center">Não há itens.</TableCell>
                         </TableRow>
                     }
                     {data?.map((item:itemProps)=>
                     <TableRow key={item.id}>
-                        <TableCell>{item.name}</TableCell>
-                        <TableCell>
-                            {item.reserved == "Reservado" && 'Reservado'}
-                            {item.reserved == "Disponivel" && <Button onClick={() => createReserve(user?.id,item.id)}>Reservar</Button>}
+                        <TableCell className="bg-fundoPrincipal text-textoPrincipal px-10 py-5 border-y-2 border-borda">{item.name}</TableCell>
+                        <TableCell className="bg-fundoPrincipal text-textoPrincipal px-10 py-5 border-y-2 border-borda">
+                            {item.reserved === "Disponivel" &&
+                             <div className="flex items-center gap-2">
+                                <div className="w-3 h-3 bg-secundaria rounded-full"></div>
+                                <span className="text-secundaria">{item.reserved}</span>
+                            </div>}
+                            {item.reserved === "Reservado" &&
+                             <div className="flex items-center gap-2">
+                                <div className="w-3 h-3 bg-primaria rounded-full"></div>
+                                <span className="text-primaria">{item.reserved}</span>
+                            </div>
+                             }
+                        </TableCell>
+                        <TableCell  className="bg-fundoPrincipal text-textoPrincipal px-10 py-5 border-y-2 border-borda">
+                            {item.reserved == "Reservado" && <Button className={'w-[80%] bg-fundoPrincipal border-2 border-borda px-8 py-6 flex items-center justify-between'} disabled> <LockKeyhole className="text-textoDesabilitado"/> Reservado</Button>}
+                            {item.reserved == "Disponivel" && <Button className={'w-[80%] bg-primaria px-8 py-6 flex items-center justify-between hover:bg-hoverPrimaria'} onClick={() => createReserve(user?.id,item.id)}>Reservar <ArrowRight/> </Button>}
                         </TableCell>
                     </TableRow>
                     )}

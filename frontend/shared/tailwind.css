@@ -50,6 +50,9 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Paleta principal */
+
   --color-fundoPrincipal:#0D0F0E;
   --color-fundoSecundairo:#151918;
   --color-card:#1C211F;
@@ -59,6 +62,24 @@
   --color-textoSecundario:#A9ADA7;
   --color-textoDesabilitado:#666D67;
 
+  /* Cor primaria */
+
+  --color-primaria:#e53d18;
+  --color-hoverPrimaria:#E85D3F;
+  --color-pressionado:#C94730;
+  --color-fundoSutil:#E85D3F1A;
+
+  /* Cor secundaria */
+
+  --color-secundaria:#167D7F;
+  --color-hoverSecundaria:#20999A;
+  --color-escuro:#105C5D;
+  --color-sutilSecundario:#167D7F1A;
+
+  /* Status */
+
+  --color-disponivel:#39A982;
+  --color-reservado:#E85D3F;
 }
 
 /*---break---
