@@ -38,7 +38,7 @@ export default function Dashboard(){
                     </li>
                 </ul>
             </nav>
-            <main className="h-dvh w-full flex flex-col justify-center relative p-10 bg-fundoSecundairo">
+            <main className="h-dvh w-full flex flex-col  relative p-10 bg-fundoSecundairo">
                 <section className="my-3">
                     <div className="space-y-2">
                         <h2 className="text-3xl font-bold text-textoPrincipal">Equipamentos</h2>

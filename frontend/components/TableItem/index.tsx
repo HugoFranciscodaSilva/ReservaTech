@@ -51,17 +51,17 @@ export default function TableItem(){
                 <TableBody>
                     {isError &&
                         <TableRow>
-                            <TableCell colSpan={3} className="text-center">Erro ao carregar itens.</TableCell>
+                            <TableCell colSpan={3} className="bg-fundoSecundairo text-textoPrincipal px-10 py-5 border-y-2 border-l-2 border-borda text-center">Erro ao carregar itens.</TableCell>
                         </TableRow>
                     }
                     {isLoading &&
                         <TableRow>
-                            <TableCell colSpan={3} className="text-center">Carregando itens...</TableCell>
+                            <TableCell colSpan={3} className="bg-fundoSecundairo text-textoPrincipal px-10 py-5 border-y-2 border-l-2 border-borda text-center">Carregando itens...</TableCell>
                         </TableRow>
                     }
                     {data?.length === 0 &&
                         <TableRow>
-                            <TableCell colSpan={3} className="text-center">Não há itens.</TableCell>
+                            <TableCell colSpan={3} className="bg-fundoSecundairo text-textoPrincipal px-10 py-5 border-y-2 border-l-2 border-borda text-center">Não há itens.</TableCell>
                         </TableRow>
                     }
                     {data?.map((item:itemProps)=>
