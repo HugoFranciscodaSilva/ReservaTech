@@ -2,7 +2,7 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button, buttonVariants } from "../ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogTrigger } from "../ui/dialog";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { useForm } from "react-hook-form";
@@ -12,8 +12,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { useAuthStore } from "@/store/store";
+import { ArrowRight, Plus } from "lucide-react";
 
 export  function DialogItem(){
+
+    const [open,setOpen] = useState<boolean>(false)
 
     async function CreateItem(data:itemSchema){
         return await API.post('/items',data)
@@ -36,17 +39,18 @@ export  function DialogItem(){
     }
 
     return(
-        <Dialog>
-            <DialogTrigger className={cn(buttonVariants({variant:"default"}),'absolute top-2 left-8')}>Adicionar Item</DialogTrigger>
-            <DialogContent>
-                <h2>Novo Item</h2>
+        <Dialog open={open} onOpenChange={setOpen}>
+            <DialogTrigger className={cn(buttonVariants({variant:"default"}),'absolute top-2 left-8 bg-primaria hover:bg-hoverPrimaria py-6 px-5')}> <Plus/> Adicionar Equipamento</DialogTrigger>
+            <DialogContent className={'bg-card border-2 border-borda'}>
+                <h2 className="text-2xl text-textoPrincipal font-bold">Adicionar Equipamento</h2>
+                <p className="text-textoSecundario">Cadastre um novo dispositivo para disponibilizá-lo para reservas.</p>
                 <form onSubmit={handleSubmit(Submit)}>
                     <div className={errors.name ? 'mb-2' : ''}>
-                        <Label htmlFor="name">Nome do item:</Label>
-                        <Input {...register("name")} id="name" placeholder="Ex: Notebook Dell" type="text"/>
+                        <Label htmlFor="name" className="text-textoPrincipal">Nome do Equipamento</Label>
+                        <Input className="border-secundaria border px-5 py-6" {...register("name")} id="name" placeholder="Ex: Notebook Dell" type="text"/>
                         {errors?.name && <span className="text-red-600">{errors.name.message}</span>}
                     </div>
-                    <Button type="submit">{isPending ? 'Adicionando...' : 'Adicionar'}</Button>
+                    <Button className={'bg-primaria hover:bg-hoverPrimaria px-5 py-6'} type="submit">{isPending ? 'Adicionando...' : 'Adicionar Equipamento'} <ArrowRight/></Button>
                 </form>
             </DialogContent>
         </Dialog>
