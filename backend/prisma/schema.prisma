@@ -28,6 +28,7 @@ model Item{
   id Int @id @default(autoincrement())
   name String
   reserves Reserve[]
+  icon String
   dataCriacao DateTime @map("criado_em") @default(now())
   reserved Status @default(Disponivel)
 
