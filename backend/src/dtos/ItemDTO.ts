@@ -1,6 +1,7 @@
 export interface ItemDTO{
     id:number,
-    name:string
+    name:string,
+    icon:string
 }
 
 export type createItemDTO = Omit<ItemDTO, 'id'>
