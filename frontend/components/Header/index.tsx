@@ -24,6 +24,7 @@ export default function Header(){
             <h2 className="text-xl text-textoPrincipal text-center absolute left-1/2 -translate-x-1/2">
                 {URL === "/dashboard" ? "Equipamentos" : ""}
                 {URL === "/historico" ? "Minhas Reservas" : ""}
+                {URL === "/relatorio" ? "Relatório de Reservas" : ""}
             </h2>
             <section className="flex gap-5 items-center">
                 <div className="border-2 border-t-borda border-x-primaria/40 border-b-primaria rounded-full px-3 py-2.5 ">
