@@ -6,7 +6,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from ".
 import { API } from "@/service/axios";
 import { itemSchema } from "@/schemas/itemSchema";
 import { useAuthStore } from "@/store/store";
-import { ArrowRight, LockKeyhole } from "lucide-react";
+import { ArrowRight, Camera, Gamepad2, Headset, Keyboard, Laptop, LockKeyhole, Monitor, Mouse, Printer, Projector, RectangleGoggles, Smartphone, TabletSmartphone } from "lucide-react";
+import { ReactNode } from "react";
 
 interface itemProps extends itemSchema{
     id:number,
@@ -14,6 +15,21 @@ interface itemProps extends itemSchema{
 }
 
 export default function TableItem(){
+
+    const iconMap:Record<string, ReactNode> = {
+        laptop:<Laptop/>,
+        smartphone:<Smartphone/>,
+        tablet:<TabletSmartphone/>,
+        monitor:<Monitor/>,
+        camera:<Camera/>,
+        vr:<RectangleGoggles/>,
+        gamepad:<Gamepad2/>,
+        headset:<Headset/>,
+        keyboard:<Keyboard/>,
+        mouse:<Mouse/>,
+        printer:<Printer/>,
+        projector:<Projector/>
+    }
 
     const user = useAuthStore((state) => state.userInfo.user)
     const queryClient = useQueryClient()
@@ -66,7 +82,14 @@ export default function TableItem(){
                     }
                     {data?.map((item:itemProps)=>
                     <TableRow key={item.id}>
-                        <TableCell className="bg-fundoSecundairo text-textoPrincipal px-10 py-5 border-y-2 border-l-2 border-borda">{item.name}</TableCell>
+                        <TableCell className="bg-fundoSecundairo text-textoPrincipal px-10 py-5 border-y-2 border-l-2 border-borda">
+                            <div className="flex items-center space-x-7">
+                                <div className={`${item.reserved === "Disponivel" ? "bg-secundaria/20 border-secundaria text-secundaria" : "bg-primaria/20 border-primaria text-primaria"} border rounded-md w-15 h-15 flex items-center justify-center`}>
+                                    {iconMap[item.icon]}
+                                </div>
+                                <p className="text-lg">{item.name}</p>
+                            </div>
+                        </TableCell>
                         <TableCell className="bg-fundoSecundairo text-textoPrincipal px-10 py-5 border-y-2 border-borda">
                             {item.reserved === "Disponivel" &&
                              <div className="flex items-center gap-2">
@@ -81,7 +104,7 @@ export default function TableItem(){
                              }
                         </TableCell>
                         <TableCell  className="bg-fundoSecundairo text-textoPrincipal px-10 py-5 border-y-2 border-r-2 border-borda">
-                            {item.reserved == "Reservado" && <Button className={'w-[80%] bg-fundoPrincipal border-2 border-borda px-8 py-6 flex items-center justify-between'} disabled> <LockKeyhole className="text-textoDesabilitado"/> Reservado</Button>}
+                            {item.reserved == "Reservado" && <Button className={'w-[80%] bg-fundoPrincipal border-2 border-borda px-8 py-6 flex items-center '} disabled> <LockKeyhole className="text-textoDesabilitado"/> Reservado</Button>}
                             {item.reserved == "Disponivel" && <Button className={'w-[80%] bg-primaria px-8 py-6 flex items-center justify-between hover:bg-hoverPrimaria'} onClick={() => createReserve(user?.id,item.id)}>Reservar <ArrowRight/> </Button>}
                         </TableCell>
                     </TableRow>
