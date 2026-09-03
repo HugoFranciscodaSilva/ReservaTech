@@ -4,14 +4,14 @@ import { useAuthStore } from "@/store/store"
 import { EllipsisVertical } from "lucide-react"
 import ButtonLogout from "../ButtonLogout"
 import Image from "next/image"
-import { getURL } from "next/dist/shared/lib/utils"
+import { usePathname } from "next/navigation"
 
 
 export default function Header(){
 
     const userInfo = useAuthStore((state)=>state.userInfo)
-    const URL = getURL()
-    const palavras = userInfo.user?.name.split(' ')
+    const URL = usePathname()
+    const palavras = userInfo.user?.name.split(' ') || ""
     const primeiraLetra = palavras[0][0]
     const segundaLetra = palavras[palavras?.length-1][0]
 
