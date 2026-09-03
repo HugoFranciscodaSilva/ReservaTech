@@ -4,7 +4,9 @@ import { jwtDecode } from 'jwt-decode'
 
 interface userPayload{
     id:number,
-    role:string
+    role:string,
+    email:string,
+    name:string
 }
 
 interface authStore{
