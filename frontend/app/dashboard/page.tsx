@@ -38,15 +38,15 @@ export default function Dashboard(){
                     </li>
                 </ul>
             </nav>
-            <main className="h-dvh w-full flex flex-col  relative p-10 bg-fundoSecundairo">
-                <section className="my-3">
+            <main className="h-dvh w-full flex flex-col p-10 bg-fundoSecundairo">
+                <section className="my-3 flex justify-between">
                     <div className="space-y-2">
                         <h2 className="text-3xl font-bold text-textoPrincipal">Equipamentos</h2>
                         <p className="text-textoSecundario">Consulte a disponibilidade e reserve um equipamento.</p>
                     </div>
+                    <AddItem/>
                 </section>
                 <TableItem/>
-                <AddItem/>
                 <ButtonHistory/>
             </main>
         </>

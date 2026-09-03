@@ -93,7 +93,7 @@ export  function DialogItem(){
 
     return(
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger className={cn(buttonVariants({variant:"default"}),'absolute top-2 left-8 bg-primaria hover:bg-hoverPrimaria py-6 px-5')}> <Plus/> Adicionar Equipamento</DialogTrigger>
+            <DialogTrigger className={cn(buttonVariants({variant:"default"}),'bg-primaria hover:bg-hoverPrimaria py-6 px-5')}> <Plus/> Adicionar Equipamento</DialogTrigger>
             <DialogContent className={'bg-card border-2 border-borda sm:max-w-[40%] w-full flex flex-col gap-0 px-7 py-3'}>
                 <div className="w-10 h-10 bg-secundaria/20 rounded justify-center items-center flex border-secundaria border">
                     <Package className="text-secundaria"/>
