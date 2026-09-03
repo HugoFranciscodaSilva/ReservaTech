@@ -20,7 +20,6 @@ export default function Dashboard(){
                     <AddItem/>
                 </section>
                 <TableItem/>
-                <ButtonHistory/>
             </main>
         </>
     )
