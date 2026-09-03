@@ -23,6 +23,9 @@ export const getReserveService = async ()=>{
 
 export const getReserveFromUserService = async (id:number)=>{
     return await prisma.reserve.findMany({
+        orderBy:{
+            id:'asc'
+        },
         where:{userId:id},
         include:{
             item:{

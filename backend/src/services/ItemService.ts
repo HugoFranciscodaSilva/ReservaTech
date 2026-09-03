@@ -4,7 +4,11 @@ import prisma from "../lib/prisma.js"
 import type { ItemSchemaType } from "../schemas/ItemSchema.js"
 
 export const getItemService = async ()=>{
-    return await prisma.item.findMany()
+    return await prisma.item.findMany({
+        orderBy:{
+            id:'asc'
+        }
+    })
 }
 
 export const postItemService = async (data:createItemDTO)=>{
