@@ -21,7 +21,7 @@ export const authService = async (data:authDTO) =>{
     }
 
     const token = jwt.sign(
-        {id:user.id,role:user.role},
+        {id:user.id,role:user.role,name:user.name,email:user.email},
         SECRET_JWT,
         {expiresIn:'1h'}
     )
